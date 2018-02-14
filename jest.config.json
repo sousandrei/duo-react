@@ -1,0 +1,14 @@
+{
+	"setupFiles": [
+		"raf/polyfill",
+		"<rootDir>/src/setupTest.js"
+	],
+	"snapshotSerializers": [
+		"enzyme-to-json/serializer"
+	],
+	"moduleNameMapper": {
+		"^.+\\.css$": "identity-obj-proxy"
+	},
+	"collectCoverage": true,
+	"testURL": "https://test.com/"
+}

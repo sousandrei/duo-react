@@ -1,0 +1,66 @@
+*,
+button,
+input,
+optgroup,
+select,
+textarea {
+    font-family: 'Source Sans Pro';
+    font-weight: 400;
+}
+
+* {
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+*:focus {
+    outline: none;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: default;
+}
+
+input:focus {
+    outline: none;
+}
+
+@mixin placeholder {
+     ::-webkit-input-placeholder {
+        @content
+    }
+     :-moz-placeholder {
+        @content
+    }
+     ::-moz-placeholder {
+        @content
+    }
+     :-ms-input-placeholder {
+        @content
+    }
+}
+
+#app {
+    height: 100vh;
+    width: 100vw;
+    background: $cinza-claro;
+}
+
+#app>div,
+#app>div>div {
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+    width: inherit;
+}

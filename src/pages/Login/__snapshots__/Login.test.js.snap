@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Login correctly 1`] = `
+<div
+  className="login"
+>
+  <div
+    className="login__logo"
+  >
+    <img
+      src="/images/marca_caixa_sirin.svg"
+    />
+  </div>
+  <div
+    className="login__form"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <input
+        name="matricula"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        placeholder="matricula"
+        type="text"
+        value=""
+      />
+      <input
+        name="senha"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        placeholder="senha"
+        type="password"
+        value=""
+      />
+      <button
+        disabled={true}
+      >
+        <span>
+          ENTRAR
+        </span>
+      </button>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`should render Login correctly with store 1`] = `
+<Login
+  login={[Function]}
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+/>
+`;

@@ -1,16 +1,22 @@
 {
 	"env": {
 		"es6": true,
-		"browser": true
+		"node": true,
+		"browser": true,
+		"jest": true
 	},
-	"extends": "eslint:recommended",
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended"
+	],
 	"parserOptions": {
+		"ecmaVersion": 8,
+		"sourceType": "module",
 		"ecmaFeatures": {
 			"jsx": true
-		},
-		"ecmaVersion": 8,
-		"sourceType": "module"
+		}
 	},
+	"parser": "babel-eslint",
 	"rules": {
 		"indent": [
 			"error",
@@ -37,9 +43,32 @@
 		"max-len": [
 			"error",
 			80
+		],
+		"keyword-spacing": [
+			"warn"
+		],
+		"key-spacing": [
+			"warn"
+		],
+		"object-curly-spacing": [
+			"warn",
+			"always"
+		],
+		"comma-spacing": [
+			"warn"
+		],
+		"arrow-spacing": [
+			"warn"
+		],
+		"space-infix-ops": [
+			"warn"
+		],
+		"space-before-blocks": [
+			"warn"
+		],
+		"array-bracket-spacing": [
+			"warn",
+			"never"
 		]
-	},
-	"plugins": [
-		"react"
-	]
+	}
 }

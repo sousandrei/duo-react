@@ -1,0 +1,40 @@
+.header {
+    display: flex;
+    border-bottom: 1px solid $cinza-escuro;
+    flex-direction: row;
+    height: 10%;
+    justify-content: space-between;
+    margin-left: 5%;
+    padding: 0% 3%;
+    width: 80%;
+}
+
+.header__logo-links {
+    width: auto;
+    height: 100%;
+    img {
+        margin-bottom: 1.5rem;
+        width: auto;
+        height: 40%;
+    }
+}
+
+.header__logo-links {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: row;
+}
+
+.header__buttons {
+    align-items: flex-end;
+    display: flex;
+    width: auto;
+    height: 100%;
+    button {
+        margin-bottom: 1.5rem;
+        img {
+            height: 1.5rem;
+            width: 1.5rem;
+        }
+    }
+}

@@ -1,47 +1,75 @@
-const path = require('path')
 const webpack = require('webpack')
+const { normalize } = require('path')
+const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
 
-module.exports = {
-	entry: './src/index.js',
-	output: {
-		path: path.resolve('dist'),
-		filename: 'bundle.js',
-	},
-	devServer: {
-		hot: true,
-		port: 8080,
-		inline: true,
-		contentBase: './dist',
-		historyApiFallback: true
-	},
-	module: {
-		rules: [
-			{
+process.env.NODE_ENV = process.env.NODE_ENV || 'development'
+
+switch (process.env.NODE_ENV) {
+	case 'test':
+		require('dotenv').config({ path: '.env/.test' })
+		break
+	default:
+		require('dotenv').config({ path: '.env/.development' })
+		break
+}
+
+module.exports = env => {
+	const isProduction = env == 'production'
+	const CSSExtract = new ExtractTextWebpackPlugin('styles.css')
+
+	return {
+		entry: ['babel-polyfill', './src/app.js'],
+		output: {
+			path: normalize(`${__dirname}/public/dist`),
+			filename: 'bundle.js'
+		},
+		module: {
+			rules: [{
+				loader: 'babel-loader',
 				test: /\.js$/,
-				exclude: /(node_modules|bower_components)/,
-				use: {
-					loader: 'babel-loader',
-					options: {
-						presets: ['es2015', 'react']
-					}
-				}
-			},
-			{
-				test: /\.css$/,
-				use: [
-					{ loader: "style-loader", options: { hmr: true } },
-					{ loader: "css-loader", options: { hmr: true } }
-				]
-			},
-			{
-				test: /\.(woff|woff2)$/,
-				use: [
-					{ loader: 'file-loader' }
-				]
-			}
-		]
-	},
-	plugins: [
-		new webpack.HotModuleReplacementPlugin()
-	]
+				exclude: /node_modules/
+			}, {
+				test: /\.s?css$/,
+				use: CSSExtract.extract({
+					use: [
+						{
+							loader: 'css-loader',
+							options: {
+								sourceMap: true,
+								importLoaders: 1
+							}
+						},
+						{
+							loader: 'postcss-loader',
+							options: {
+								sourceMap: true
+							}
+						},
+						{
+							loader: 'sass-loader',
+							options: {
+								sourceMap: true
+							}
+						},
+					]
+				})
+			}]
+		},
+		plugins: [
+			CSSExtract,
+			new webpack.DefinePlugin({
+				'process.env.endpoint': JSON.stringify(process.env.ENDPOINT),
+			}),
+			// new webpack.HotModuleReplacementPlugin()
+		],
+		devtool: isProduction ? undefined : 'inline-source-map',
+		devServer: {
+			// hot: true,
+			// inline: true,
+			host: '0.0.0.0',
+			contentBase: normalize(`${__dirname}/public`),
+			historyApiFallback: true,
+			publicPath: '/dist/'
+		}
+	}
 }

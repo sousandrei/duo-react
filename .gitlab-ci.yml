@@ -1,0 +1,35 @@
+image: node:8.9.4-alpine
+
+stages:
+  - build
+  - test
+
+build:dev:
+  stage: build
+  script:
+    - npm install
+    - npm run build:dev
+  cache:
+    policy: pull
+    paths:
+      - node_modules/
+      - public/dist/
+
+build:prod:
+  stage: build
+  script:
+    - npm install
+    - npm run build:dev
+  cache: 
+    policy: pull
+
+test:dev:
+  stage: test
+  script:
+    - npm install
+    - npm test
+  cache: 
+    paths:
+        - node_modules/
+        - public/dist/
+  coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'

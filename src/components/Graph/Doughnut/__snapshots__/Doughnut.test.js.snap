@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Doughnut correctly 1`] = `
+<div
+  className="doughnut"
+>
+  <div
+    className="doughnut__legend"
+  >
+    <div>
+      <hr />
+      <span>
+        min
+      </span>
+    </div>
+    <div>
+      <hr />
+      <span>
+        max
+      </span>
+    </div>
+  </div>
+  <Doughnut
+    data={
+      Object {
+        "datasets": Array [
+          Object {
+            "backgroundColor": Array [
+              "#efb524",
+              "#36d6cc",
+            ],
+            "borderColor": Array [
+              "rgba(0, 0, 0, 0)",
+              "rgba(0, 0, 0, 0)",
+            ],
+            "data": Array [
+              50,
+              50,
+            ],
+          },
+        ],
+        "labels": Array [
+          "min",
+          "max",
+        ],
+      }
+    }
+    options={
+      Object {
+        "legend": Object {
+          "display": false,
+        },
+      }
+    }
+  />
+</div>
+`;

@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Dashboard page correctly 1`] = `
+<div
+  className="dashboard"
+>
+  <div
+    className="dashboard__graphs"
+  >
+    <Doughnut
+      max={75}
+      maxLabel="Label2"
+      min={25}
+      minLabel="Label1"
+    />
+    <Doughnut
+      max={50}
+      maxLabel="Label4"
+      min={50}
+      minLabel="Label3"
+    />
+  </div>
+  <hr
+    className="dashboard__divider"
+  />
+  <div
+    className="dashboard__calendar"
+  >
+    oi
+  </div>
+</div>
+`;
