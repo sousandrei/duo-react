@@ -1,17 +1,17 @@
 .header {
     display: flex;
-    border-bottom: 1px solid $cinza-escuro;
+    border-bottom: 2px solid $cinza-escuro;
     flex-direction: row;
     height: 10%;
     justify-content: space-between;
-    margin-left: 5%;
-    padding: 0% 3%;
-    width: 80%;
+    margin-left: 7.5%;
+    width: 85%;
 }
 
 .header__logo-links {
     width: auto;
-    height: 100%;
+	height: 100%;
+	padding-left: 5%;
     img {
         margin-bottom: 1.5rem;
         width: auto;
@@ -22,7 +22,8 @@
 .header__logo-links {
     align-items: flex-end;
     display: flex;
-    flex-direction: row;
+	flex-direction: row;
+	padding-right: 5%;
 }
 
 .header__buttons {
