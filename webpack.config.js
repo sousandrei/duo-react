@@ -58,7 +58,7 @@ module.exports = env => {
 		plugins: [
 			CSSExtract,
 			new webpack.DefinePlugin({
-				'process.env.endpoint': JSON.stringify(process.env.ENDPOINT),
+				'process.env.DASHBOARD': JSON.stringify(process.env.DASHBOARD),
 			}),
 			// new webpack.HotModuleReplacementPlugin()
 		],
