@@ -1,6 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import moment from 'moment'
 import { merge } from 'lodash'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { getData } from '../../actions/data'
@@ -13,24 +14,40 @@ export class Dashboard extends React.Component {
 		last: {
 			volts: '0',
 			amps: '0.0',
-			kwh: '0.0'
+			kw: '0.0'
+		},
+		consumption: {
+			real: '0.0',
+			kwh: '0.0',
 		}
 	}
 
 	componentWillReceiveProps(nextProps) {
-		// const lastMonth = 
-		// nextProps.data.month[nextProps.data.month.length - 1]
-		const lastData = nextProps.data.last
+		// const day = nextProps.data.day
+		// const week = nextProps.data.week
+		const month = nextProps.data.month
+		const last = nextProps.data.last
 
-		console.log(this.state)
-		console.log(lastData)
+
+		const initMonthDate = new Date(new Date().getFullYear(),
+			new Date().getMonth(), 1)
+		const hours = moment().diff(initMonthDate) / 3600000
+
+		console.log(month[0])
+		console.log(month[0].watts)
+		console.log(month[0].watts / 1000)
+		console.log(hours)
 
 		let state = {
 			last: {
-				volts: lastData ? Math.round(lastData.volts) : '0',
-				amps: lastData ? String(lastData.amps) : '0.0',
-				kwh: lastData ?
-					String((lastData.volts * lastData.amps) / 1000) : '0.0'
+				volts: last ? Math.round(last.volts) : '0',
+				amps: last ? String(last.amps) : '0.0',
+				kw: last ? String(last.watts / 1000) : '0.0'
+			},
+			consumption: {
+				real: month ?
+					String(((month[0].watts / 1000) / hours) * .6130414) : '0',
+				kwh: month ? String((month[0].watts / 1000) / hours) : '0.0',
 			}
 		}
 
@@ -53,14 +70,18 @@ export class Dashboard extends React.Component {
 				</div>
 				<div className='dashboard__firstRow-body'>
 					<div>
-						<h1>100</h1>
-						<h2>,10</h2>
+						<h1>{this.state.consumption
+							.real.split('.')[0]}</h1>
+						<h2>,{this.state.consumption
+							.real.split('.')[1][0]}</h2>
 						<span>R$</span>
 					</div>
 					<hr />
 					<div>
-						<h1>789</h1>
-						<h2>,0</h2>
+						<h1>{this.state.consumption
+							.kwh.split('.')[0]}</h1>
+						<h2>,{this.state.consumption
+							.kwh.split('.')[1][0]}</h2>
 						<span>kW/h</span>
 					</div>
 				</div>
@@ -109,8 +130,8 @@ export class Dashboard extends React.Component {
 					</div>
 					<div className='dashboard__secondRow-body'>
 						<div>
-							<h1>{this.state.last.kwh.split('.')[0]}</h1>
-							<h2>,{this.state.last.kwh.split('.')[1][0]}</h2>
+							<h1>{this.state.last.kw.split('.')[0]}</h1>
+							<h2>,{this.state.last.kw.split('.')[1][0]}</h2>
 							<span>kW</span>
 						</div>
 					</div>
