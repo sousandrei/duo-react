@@ -35,9 +35,9 @@ export class Dashboard extends React.Component {
 
 		let state = {
 			last: {
-				volts: last ? Math.round(last.volts) : '0',
-				amps: last ? String(last.amps) : '0.0',
-				kw: last ? String(last.watts / 1000) : '0.0'
+				volts: last ? Math.round(last.volts.toFixed(1)) : '0',
+				amps: last ? String(last.amps.toFixed(1)) : '0.0',
+				kw: last ? String(last.watts.toFixed(1) / 1000) : '0.0'
 			},
 			consumption: {
 				real: month.length ?
