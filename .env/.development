@@ -1,1 +1,2 @@
 DASHBOARD=http://localhost:8010/akuntsu-168619/us-central1/dashboard
+DASHBOARD=https://us-central1-akuntsu-168619.cloudfunctions.net/dashboard

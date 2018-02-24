@@ -2,18 +2,22 @@ const webpack = require('webpack')
 const { normalize } = require('path')
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'development'
-
-switch (process.env.NODE_ENV) {
-	case 'test':
-		require('dotenv').config({ path: '.env/.test' })
-		break
-	default:
-		require('dotenv').config({ path: '.env/.development' })
-		break
-}
-
 module.exports = env => {
+	
+	process.env.NODE_ENV = env || 'development'
+	
+	switch (process.env.NODE_ENV) {
+		case 'test':
+			require('dotenv').config({ path: '.env/.test' })
+			break
+		case 'production':
+			require('dotenv').config({ path: '.env/.production' })
+			break
+		default:
+			require('dotenv').config({ path: '.env/.development' })
+			break
+	}
+	
 	const isProduction = env == 'production'
 	const CSSExtract = new ExtractTextWebpackPlugin('styles.css')
 

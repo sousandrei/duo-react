@@ -1,8 +1,4 @@
 import { history } from '../routers/Router'
-// import { get } from 'axios'
-
-// const ENDPOINT = process.env.ENDPOINT
-
 
 export const loginAction = (user) => ({
 	type: 'LOGIN',

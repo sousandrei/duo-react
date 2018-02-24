@@ -33,11 +33,6 @@ export class Dashboard extends React.Component {
 			new Date().getMonth(), 1)
 		const hours = moment().diff(initMonthDate) / 3600000
 
-		console.log(month[0])
-		console.log(month[0].watts)
-		console.log(month[0].watts / 1000)
-		console.log(hours)
-
 		let state = {
 			last: {
 				volts: last ? Math.round(last.volts) : '0',
@@ -45,9 +40,11 @@ export class Dashboard extends React.Component {
 				kw: last ? String(last.watts / 1000) : '0.0'
 			},
 			consumption: {
-				real: month ?
-					String(((month[0].watts / 1000) / hours) * .6130414) : '0',
-				kwh: month ? String((month[0].watts / 1000) / hours) : '0.0',
+				real: month.length ?
+					String(((month[0].watts / 1000) / hours) * .6130414) :
+					'0.0',
+				kwh: month.length ?
+					String((month[0].watts / 1000) / hours) : '0.0',
 			}
 		}
 
