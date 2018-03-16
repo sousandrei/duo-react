@@ -63,9 +63,9 @@ export class Dashboard extends React.Component {
 			},
 			consumption: {
 				real: month.length ?
-					((month[0].watts / 1000) / hoursSinceMonth) * precoLuz : 0,
+					((month[0].watts / 1000)) * 768 * precoLuz : 0,
 				kwh: month.length ?
-					(month[0].watts / 1000) / hoursSinceMonth : 0,
+					(month[0].watts / 1000) * 768 : 0,
 			}
 		}
 
@@ -135,40 +135,35 @@ export class Dashboard extends React.Component {
 				const { day, hour } = d._id
 				let hours
 
-				if (hour)
-					hours = hoursSinceMonth
-				else if (day)
-					hours = hoursSinceWeek
-				else
-					hours = 720
+				switch (this.state.select) {
+					default:
+					case 'dia':
+						hours = hour
+						break
+					case 'week':
+					case 'month':
+						hours = day * 24
+						break
+					case 'semester':
+						hours = 768
+						break
+				}
 
-				return d.watts / 1000 / hours
+				return (d.watts / 1000) * hours
 			}),
 			real: []
 		}
 
-		if (this.state.select == 'semester') {
-			history = {
-				...history,
-				kw: semester.sort((a, b) => a._id.month > b._id.month
-					? 1 : -1).map(d => d.watts / 1000),
-				kwh: semester.sort((a, b) => a._id.month > b._id.month
-					? 1 : -1).map(d => d.watts / 1000 / 720),
-				real: []
-			}
-		}
-
-
 		for (let i in history.kwh) {
 			if (i < 1) {
+				history.kwh[i] = history.kwh[i]
 				history.real[i] = history.kwh[i] * precoLuz
 				continue
 			}
 
+			history.kwh[i] = history.kwh[i] + history.kwh[i - 1]
 			history.real[i] = history.kwh[i] * precoLuz
 		}
-
-
 
 		return (
 			<div className='dashboard'>
