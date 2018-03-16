@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import { history } from '../../routers/Router'
 import { logout } from '../../actions/auth'
+import { setState } from '../../actions/state'
 
 
 export class Header extends React.Component {
@@ -16,11 +17,37 @@ export class Header extends React.Component {
 		history.push(`/${key}`)
 	}
 
+	handleGraphClick = () => {
+		this.props.setState({ graph: !this.props.graph })
+	}
+
+	handleSelectClick = value => {
+		this.props.setState({ select: value })
+	}
+
 	render() {
 		return (
 			<header className='header'>
 				<div className='header__logo-links'>
-					<img src='/images/logo_duo_ph.svg' />
+					<button>
+						<img src='/images/logo_duo_ph.svg' />
+					</button>
+					<hr />
+					<button onClick={this.handleGraphClick}>
+						<img src='/icons/ic_graficos_dg.svg' />
+					</button>
+					<button onClick={() => this.handleSelectClick('day')}>
+						Dia
+					</button>
+					<button onClick={() => this.handleSelectClick('week')}>
+						Semana
+					</button>
+					<button onClick={() => this.handleSelectClick('month')}>
+						Mes
+					</button>
+					<button onClick={() => this.handleSelectClick('semester')}>
+						Semestre
+					</button>
 				</div>
 				<div className='header__buttons'>
 					<button
@@ -35,13 +62,20 @@ export class Header extends React.Component {
 }
 
 Header.propTypes = {
-	logout: PropTypes.func
+	graph: PropTypes.bool,
+	logout: PropTypes.func,
+	setState: PropTypes.func,
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
-		logout: () => dispatch(logout())
+		logout: () => dispatch(logout()),
+		setState: state => dispatch(setState(state))
 	}
 }
 
-export default connect(undefined, mapDispatchToProps)(Header)
+const mapStateToProps = (state, props) => ({
+	graph: state.state.graph
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

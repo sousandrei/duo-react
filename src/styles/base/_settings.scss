@@ -10,3 +10,17 @@ $verde: #25E19A;
 $azul-claro: #34ACF2;
 $azul-escuro: #436DF6;
 $rosa: #F64A7F;
+
+:export {
+    preto: $preto;
+    branco: $branco;
+    cinzaClaro: $cinza-claro;
+    cinzaEscuro: $cinza-escuro;
+    cinza: $cinza;
+    amarelo: $amarelo;
+    laranja: $laranja;
+    verde: $verde;
+    azulClaro: $azul-claro;
+    azulEscuro: $azul-escuro;
+    rosa: $rosa;
+}

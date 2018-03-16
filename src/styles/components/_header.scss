@@ -9,21 +9,33 @@
 }
 
 .header__logo-links {
-    width: auto;
-	height: 100%;
-	padding-left: 5%;
-    img {
-        margin-bottom: 1.5rem;
-        width: auto;
-        height: 40%;
-    }
-}
-
-.header__logo-links {
     align-items: flex-end;
     display: flex;
-	flex-direction: row;
-	padding-right: 5%;
+    width: auto;
+    height: 100%;
+    padding-left: 2.5%;
+    > * {
+        margin-bottom: 1rem;
+    }
+    hr {
+        border: none;
+        border-right: 1px solid transparentize($cinza-escuro, .75);
+        height: 35%;
+        margin-left: 15%;
+        margin-right: 15%;
+        width: 0px;
+    }
+    button {
+        img {
+            height: 1.5rem;
+            width: 1.5rem;
+        }
+    }
+    button:nth-of-type(1) {
+        img {
+            width: auto;
+        }
+    }
 }
 
 .header__buttons {
@@ -31,8 +43,9 @@
     display: flex;
     width: auto;
     height: 100%;
+    padding-right: 2.5%;
     button {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
         img {
             height: 1.5rem;
             width: 1.5rem;
