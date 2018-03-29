@@ -1,6 +1,6 @@
 const defaultState = {
 	graph: false,
-	select: 'dia'
+	select: 'day'
 }
 
 export default (

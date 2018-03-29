@@ -6,6 +6,10 @@ import { history } from '../../routers/Router'
 import { logout } from '../../actions/auth'
 import { setState } from '../../actions/state'
 
+import {
+	amarelo
+} from '../../styles/base/_settings.scss'
+
 
 export class Header extends React.Component {
 
@@ -18,7 +22,7 @@ export class Header extends React.Component {
 	}
 
 	handleGraphClick = () => {
-		this.props.setState({ graph: !this.props.graph })
+		this.props.setState({ graph: !this.props.state.graph })
 	}
 
 	handleSelectClick = value => {
@@ -26,6 +30,12 @@ export class Header extends React.Component {
 	}
 
 	render() {
+
+		const {
+			graph,
+			select
+		} = this.props.state
+
 		return (
 			<header className='header'>
 				<div className='header__logo-links'>
@@ -34,20 +44,38 @@ export class Header extends React.Component {
 					</button>
 					<hr />
 					<button onClick={this.handleGraphClick}>
-						<img src='/icons/ic_graficos_dg.svg' />
+						{graph ?
+							<img src='/icons/ic_graficos_yl.svg' /> :
+							<img src='/icons/ic_graficos_dg.svg' />}
 					</button>
-					<button onClick={() => this.handleSelectClick('day')}>
-						Dia
-					</button>
-					<button onClick={() => this.handleSelectClick('week')}>
-						Semana
-					</button>
-					<button onClick={() => this.handleSelectClick('month')}>
-						Mes
-					</button>
-					<button onClick={() => this.handleSelectClick('semester')}>
-						Semestre
-					</button>
+					{graph && <button
+						onClick={() => this.handleSelectClick('day')}>
+						<span style={select == 'day' ?
+							{ color: amarelo } : {}}>
+							Dia
+						</span>
+					</button>}
+					{graph && <button
+						onClick={() => this.handleSelectClick('week')}>
+						<span style={select == 'week' ?
+							{ color: amarelo } : {}}>
+							Semana
+						</span>
+					</button>}
+					{graph && <button
+						onClick={() => this.handleSelectClick('month')}>
+						<span style={select == 'month' ?
+							{ color: amarelo } : {}}>
+							Mes
+						</span>
+					</button>}
+					{graph && <button
+						onClick={() => this.handleSelectClick('semester')}>
+						<span style={select == 'semester' ?
+							{ color: amarelo } : {}}>
+							Semestre
+						</span>
+					</button>}
 				</div>
 				<div className='header__buttons'>
 					<button
@@ -62,7 +90,7 @@ export class Header extends React.Component {
 }
 
 Header.propTypes = {
-	graph: PropTypes.bool,
+	state: PropTypes.object,
 	logout: PropTypes.func,
 	setState: PropTypes.func,
 }
@@ -74,8 +102,8 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-const mapStateToProps = (state, props) => ({
-	graph: state.state.graph
+const mapStateToProps = state => ({
+	state: state.state
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)
