@@ -88,7 +88,7 @@ export class Login extends React.Component {
 							<input
 								onFocus={this.handleFocus}
 								onBlur={this.handleBlur}
-								placeholder='matrícula'
+								placeholder='username'
 								onChange={this.handleusernameChange}
 								value={this.state.username}
 								type='text'
