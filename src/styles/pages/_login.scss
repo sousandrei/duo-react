@@ -1,0 +1,119 @@
+.login {
+	align-items: center;
+	background-image: url('/images/duo_bg.png');
+	background-position: 0 50%;
+	background-repeat: no-repeat;
+	background-size: 115%;
+	flex-direction: row !important;
+	display: flex;
+	height: inherit;
+	justify-content: center;
+	width: inherit;	
+}
+
+.login__logo {
+	align-items: center;
+	box-shadow: 1px 1px 45px -15px black;
+	display: flex;
+	background: #ffffff;
+	height: 30%;
+	justify-content: center;
+	margin: 0 -2% 1% 0;
+	width: 25%;
+	transition: margin .2s ease-out;
+	z-index: 1;
+
+	img {
+		height: 35%;
+	}
+}
+
+.login__logo--back {
+	z-index: 0;
+	margin: 1% -2% 0 0;
+}
+
+.login__form {
+	align-items: center;
+	background: $laranja;
+	box-shadow: 1px 1px 45px -15px black;
+	display: flex;
+	height: 30%;
+	justify-content: center;
+	margin: 1% 0 0 -2%;
+	width: 25%;
+	transition: margin .2s ease-out;
+	z-index: 0;
+
+	.loader {
+		height: 12vh;
+		width: 12vh;
+	}
+
+	form {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		justify-content: center;	
+		position: relative;
+		width: 50%;
+
+		button {
+			border: 1px white solid;
+			border-radius: 3px;
+			color: white;
+			height: 40px;
+			margin: 5% 0;
+			width: 60%;
+		}
+
+		button:enabled:hover {
+			background: white;
+			color: $laranja;
+		}
+
+		button:disabled {
+			border: 1px rgba(255, 255, 255, .5) solid;
+			color: rgba(255, 255, 255, .5);
+		}
+		
+		input {
+			color: white;
+			background: none;
+			box-sizing: border-box;
+			border: none;
+			border-bottom: 1px solid white;
+			font-size: 1.2rem;
+			margin: 5% 0;
+			padding-left: 5%;
+			padding-bottom: 1%;
+			width: 100%;
+		}
+		
+		@include placeholder {
+			color: rgba(255, 255, 255, .8);
+		}
+
+		p {
+			color: white;
+			position: absolute;
+			margin: 0;
+			bottom: 10%;
+		}
+
+	}
+
+}
+
+.login__form--front {
+	z-index: 1;
+	margin: 0 0 1% -2%;
+}
+
+.version-tag {
+	position: fixed;
+	color: white;
+	bottom: .5vh;
+	right: .5vw;
+}

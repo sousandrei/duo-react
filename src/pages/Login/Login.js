@@ -6,12 +6,14 @@ import { login } from '../../actions/auth'
 
 import Loading from '../Loading/Loading'
 
+const version = process.env.VERSION
+
 export class Login extends React.Component {
 
 	state = {
 		error: '',
 		username: '',
-		senha: '',
+		password: '',
 		focused: false,
 		loading: false
 	}
@@ -27,14 +29,14 @@ export class Login extends React.Component {
 	handleLogin = async e => {
 		e.preventDefault()
 
-		let senha = this.state.senha
+		let password = this.state.password
 		let username = this.state.username
 
 		this.setState({ loading: true })
 
 		try {
-			await this.props.login({ username, senha })
-		} catch (error) /* istanbul ignore next*/ {
+			await this.props.login({ username, password })
+		} catch (error) {
 			this.setState({ error: error.toString(), loading: false })
 
 			// todo tratar o tipo de erro de login
@@ -45,67 +47,75 @@ export class Login extends React.Component {
 
 	}
 
-	handleUsernameChange = e => {
-		const error = 'username muito curto'
-		let username = e.target.value
-
-		username.length >= 6 ?
-			this.setState(() => ({ error: '' })) :
-			this.setState(() => ({ error }))
+	handleusernameChange = e => {
+		let username = e.target.value.toUpperCase()
 
 		this.setState(() => ({ username }))
 	}
 
-	handleSenhaChange = e => {
-		const passError = 'Senha invalida'
-		let senha = e.target.value
+	handlepasswordChange = e => {
+		const passError = 'senha invalida'
+		let password = e.target.value
 		let error = this.state.error
 
-		senha.length <= 3 ?
-			error ? null : error = 'Senha invalida' :
+		password.length <= 3 ?
+			error ? null : error = 'senha invalida' :
 			error == passError ? error = '' : null
 
-		senha.length < 1 ?
+		password.length < 1 ?
 			error = '' : null
 
-		this.setState(() => ({ senha, error }))
+		this.setState(() => ({ password, error }))
 	}
 
 	render() {
 		return (
 			<div className='login'>
-				{this.state.loading ?
-					<Loading /> :
-					<form
-						onSubmit={this.handleLogin}>
-						<input
-							onFocus={this.handleFocus}
-							onBlur={this.handleBlur}
-							placeholder='username'
-							onChange={this.handleUsernameChange}
-							value={this.state.username}
-							type='text'
-							name='username' />
-						<input
-							onFocus={this.handleFocus}
-							onBlur={this.handleBlur}
-							placeholder='senha'
-							onChange={this.handleSenhaChange}
-							value={this.state.senha}
-							type='password'
-							name='senha' />
-						<button
-							disabled={this.state.loading ||
-								this.state.error.length > 1 ||
-								this.state.username.length < 6 ||
-								this.state.senha.length < 3}>
-							<span>ENTRAR</span>
-						</button>
-						{this.state.error &&
-							<p>{this.state.error}</p>}
-					</form>
-				}
-			</div >
+				<div
+					className={this.state.focused ?
+						'login__logo login__logo--back' :
+						'login__logo'}>
+
+					<img src='/images/logo_duo_ph.svg' />
+				</div>
+				<div className={this.state.focused ?
+					'login__form login__form--front' :
+					'login__form'}>
+					{this.state.loading ?
+						<Loading /> :
+						<form
+							onSubmit={this.handleLogin}>
+							<input
+								onFocus={this.handleFocus}
+								onBlur={this.handleBlur}
+								placeholder='matrícula'
+								onChange={this.handleusernameChange}
+								value={this.state.username}
+								type='text'
+								name='username' />
+							<input
+								onFocus={this.handleFocus}
+								onBlur={this.handleBlur}
+								placeholder='password'
+								onChange={this.handlepasswordChange}
+								value={this.state.password}
+								maxLength='32'
+								type='password'
+								name='password' />
+							<button
+								disabled={this.state.loading ||
+									this.state.error.length > 1 ||
+									this.state.username.length < 6 ||
+									this.state.password.length < 3}>
+								<span>ENTRAR</span>
+							</button>
+							{this.state.error &&
+								<p>{this.state.error}</p>}
+						</form>
+					}
+				</div>
+				<span className='version-tag'>{version}</span>
+			</div>
 		)
 	}
 }
@@ -117,7 +127,7 @@ Login.propTypes = {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		login: () => dispatch(login())
+		login: obj => dispatch(login(obj))
 	}
 }
 
